@@ -13,15 +13,7 @@
             padding: 20px;
             margin: 0;
         }
-        #password-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
         #main-content {
-            display: none;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -31,7 +23,7 @@
             box-shadow: 0 8px 16px rgba(212, 114, 0, 0.4);
             margin-bottom: 20px;
         }
-        input[type="password"], select, button {
+        select, button {
             padding: 12px 20px;
             font-size: 16px;
             border-radius: 8px;
@@ -87,15 +79,7 @@
 </head>
 <body>
 
-    <!-- Gate 1: Main Portal Entrance -->
-    <div id="password-screen">
-        <h2>Enter Password to Access</h2>
-        <input type="password" id="password-input" placeholder="Enter password...">
-        <button onclick="checkPassword()">Access Portal</button>
-        <p id="error-msg" style="color: red; display: none;">Incorrect password. Try again.</p>
-    </div>
-
-    <!-- Main Content Dashboard -->
+    <!-- Main Content Dashboard (Visible Immediately) -->
     <div id="main-content">
         <h1>Tung Tung Sahur Portal</h1>
         
@@ -107,7 +91,7 @@
             <!-- OPTION 1: MODDED SUBWAY SURFERS SECTION -->
             <div class="section-box">
                 <label>Modded Unlocked All Subway Surfers</label>
-                <button class="subway-btn" onclick="accessSubwaySurfers()">Launch Subway Surfers Mod</button>
+                <button class="subway-btn" onclick="launchSubwaySurfers()">Launch Subway Surfers Mod</button>
             </div>
 
             <!-- OPTION 2: GENERAL UNBLOCKED WEBSITES DROPDOWN -->
@@ -221,41 +205,16 @@
     </div>
 
     <script>
-        // Check main entrance password (Updated to "tungtung")
-        function checkPassword() {
-            const userInput = document.getElementById('password-input').value;
-            if (userInput === "tungtung") {
-                document.getElementById('password-screen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-            } else {
-                document.getElementById('error-msg').style.display = 'block';
-            }
-        }
-
-        // Allow 'Enter' key shortcut on access prompt
-        document.getElementById('password-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-
-        // Gate 2: Password check specifically for Subway Surfers Modded Option
-        function accessSubwaySurfers() {
-            const secretPass = prompt("Enter password to access Modded Subway Surfers:");
+        // Directly prompts link choices for Subway Surfers option
+        function launchSubwaySurfers() {
+            const choice = prompt("Type 1 to open Subway Surfers link #1\nType 2 to open Subway Surfers link #2");
             
-            if (secretPass === "67tungtung") {
-                // Ask the user which source link they want to open
-                const choice = prompt("Type 1 to open Subway Surfers link #1\nType 2 to open Subway Surfers link #2");
-                
-                if (choice === "1") {
-                    launchSite("https://ss.randomkzn.com");
-                } else if (choice === "2") {
-                    launchSite("https://ashuni.lol/");
-                } else if (choice !== null) {
-                    alert("Invalid choice. Please enter 1 or 2.");
-                }
-            } else if (secretPass !== null) {
-                alert("Incorrect password. Access Denied.");
+            if (choice === "1") {
+                launchSite("https://ss.randomkzn.com");
+            } else if (choice === "2") {
+                launchSite("https://ashuni.lol/");
+            } else if (choice !== null) {
+                alert("Invalid choice. Please enter 1 or 2.");
             }
         }
 
