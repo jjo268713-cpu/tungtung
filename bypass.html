@@ -50,24 +50,44 @@
         button:hover {
             background-color: #ff8c00;
         }
-        .selector-container {
+        .dashboard-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .section-box {
             background-color: #2a1a08;
-            padding: 25px;
+            padding: 20px;
             border-radius: 12px;
             border: 1px solid #d47200;
-            margin-top: 20px;
         }
         label {
             display: block;
             font-size: 18px;
             margin-bottom: 10px;
             color: #ffbc66;
+            font-weight: bold;
+        }
+        select {
+            width: 90%;
+        }
+        .subway-btn {
+            background-color: #8a00d4;
+            border-color: #b366ff;
+            width: 90%;
+            font-size: 18px;
+            padding: 15px;
+        }
+        .subway-btn:hover {
+            background-color: #aa33ff;
         }
     </style>
 </head>
 <body>
 
-    <!-- Main Password Screen -->
+    <!-- Gate 1: Main Portal Entrance -->
     <div id="password-screen">
         <h2>Enter Password to Access</h2>
         <input type="password" id="password-input" placeholder="Enter password...">
@@ -75,128 +95,133 @@
         <p id="error-msg" style="color: red; display: none;">Incorrect password. Try again.</p>
     </div>
 
-    <!-- Main Dashboard Menu -->
+    <!-- Main Content Dashboard -->
     <div id="main-content">
         <h1>Tung Tung Sahur Portal</h1>
         
-        <!-- Theme Image -->
+        <!-- Referenced Theme Image File -->
         <img src="image_3ed498.jpg" alt="Tung Tung Sahur" class="theme-img">
 
-        <div class="selector-container">
-            <label for="link-selector">Select a Site to Launch:</label>
-            <select id="link-selector" onchange="handleSelection(this)">
-                <option value="">-- Choose an Option --</option>
-                
-                <!-- NEW SECURED CATEGORY -->
-                <optgroup label="Subways (Requires Password)">
-                    <option value="https://ss.randomkzn.com/" data-secure="true">Subways - RandomKZN</option>
-                    <option value="https://ashuni.lol/" data-secure="true">Subways - Ashuni</option>
-                </optgroup>
+        <div class="dashboard-layout">
+            
+            <!-- OPTION 1: MODDED SUBWAY SURFERS SECTION -->
+            <div class="section-box">
+                <label>Modded Unlocked All Subway Surfers</label>
+                <button class="subway-btn" onclick="accessSubwaySurfers()">Launch Subway Surfers Mod</button>
+            </div>
 
-                <optgroup label="Fern">
-                    <option value="https://s3.amazonaws.com/glwithfinals/index.html">Fern - GL With Finals</option>
-                    <option value="https://glwithfinals.s3.amazonaws.com/index.html">Fern - GL Finals Mirror</option>
-                    <option value="https://s3.amazonaws.com/fstudentsareinventors/index.html">Fern - Student Inventors</option>
-                    <option value="https://fstudentsareinventors.s3.amazonaws.com/index.html">Fern - Student Inventors Mirror</option>
-                </optgroup>
+            <!-- OPTION 2: GENERAL UNBLOCKED WEBSITES DROPDOWN -->
+            <div class="section-box">
+                <label for="link-selector">Unblocked Websites Collection</label>
+                <select id="link-selector" onchange="launchSite(this.value); this.selectedIndex = 0;">
+                    <option value="">-- Choose a Website --</option>
+                    
+                    <optgroup label="Fern">
+                        <option value="https://s3.amazonaws.com/glwithfinals/index.html">Fern - GL With Finals</option>
+                        <option value="https://glwithfinals.s3.amazonaws.com/index.html">Fern - GL Finals Mirror</option>
+                        <option value="https://s3.amazonaws.com/fstudentsareinventors/index.html">Fern - Student Inventors</option>
+                        <option value="https://fstudentsareinventors.s3.amazonaws.com/index.html">Fern - Student Inventors Mirror</option>
+                    </optgroup>
 
-                <optgroup label="Infamous">
-                    <option value="https://swiftnote10494.lilith.com.au/">Infamous - Swiftnote</option>
-                    <option value="https://steadyroom54969.justinsteiger.com/">Infamous - Steadyroom</option>
-                    <option value="https://boldscopefe.lastarria.cl/">Infamous - Boldscope</option>
-                    <option value="https://bravelab.lotossutra.at/">Infamous - Bravelab</option>
-                    <option value="https://quickdash494.lilith.com.au/">Infamous - Quickdash</option>
-                    <option value="https://steadyfocus88400.justinsteiger.com/">Infamous - Steadyfocus</option>
-                    <option value="https://ace-core-70844.hoohaamelbourne.com.au/">Infamous - Ace Core</option>
-                    <option value="https://finescope4281.lotossutra.at/">Infamous - Finescope</option>
-                    <option value="https://calmprepa8.lilith.com.au/">Infamous - Calmprepa</option>
-                    <option value="https://cleanhub25187.lastarria.cl/">Infamous - Cleanhub</option>
-                    <option value="https://quickcore378.lotossutra.at/">Infamous - Quickcore</option>
-                    <option value="https://easy-book-593.lilith.com.au/">Infamous - Easy Book</option>
-                    <option value="https://simplelearn4684.justinsteiger.com/">Infamous - Simplelearn</option>
-                    <option value="https://quiet-edge-10627.lastarria.cl/">Infamous - Quiet Edge</option>
-                    <option value="https://brave-course-669.hoohaamelbourne.com.au/">Infamous - Brave Course</option>
-                    <option value="https://deepspan847.lilith.com.au/">Infamous - Deepspan</option>
-                    <option value="https://quick-plan.justinsteiger.com/">Infamous - Quick Plan</option>
-                    <option value="https://solidlearn5100.lastarria.cl/">Infamous - Solidlearn</option>
-                    <option value="https://nimblenode5084.lotossutra.at/">Infamous - Nimblenode</option>
-                    <option value="https://rapidnet8760.b-cdn.net/">Infamous - Rapidnet</option>
-                    <option value="https://litewave9206.b-cdn.net/">Infamous - Litewave</option>
-                    <option value="https://litenet8394.b-cdn.net/">Infamous - Litenet</option>
-                    <option value="https://meganode2515.b-cdn.net/">Infamous - Meganode</option>
-                    <option value="https://primecache3991.b-cdn.net/">Infamous - Primecache</option>
-                    <option value="https://megabeam3500.b-cdn.net/">Infamous - Megabeam</option>
-                    <option value="https://quickhost3591.b-cdn.net/">Infamous - Quickhost</option>
-                </optgroup>
+                    <optgroup label="Infamous">
+                        <option value="https://swiftnote10494.lilith.com.au/">Infamous - Swiftnote</option>
+                        <option value="https://steadyroom54969.justinsteiger.com/">Infamous - Steadyroom</option>
+                        <option value="https://boldscopefe.lastarria.cl/">Infamous - Boldscope</option>
+                        <option value="https://bravelab.lotossutra.at/">Infamous - Bravelab</option>
+                        <option value="https://quickdash494.lilith.com.au/">Infamous - Quickdash</option>
+                        <option value="https://steadyfocus88400.justinsteiger.com/">Infamous - Steadyfocus</option>
+                        <option value="https://ace-core-70844.hoohaamelbourne.com.au/">Infamous - Ace Core</option>
+                        <option value="https://finescope4281.lotossutra.at/">Infamous - Finescope</option>
+                        <option value="https://calmprepa8.lilith.com.au/">Infamous - Calmprepa</option>
+                        <option value="https://cleanhub25187.lastarria.cl/">Infamous - Cleanhub</option>
+                        <option value="https://quickcore378.lotossutra.at/">Infamous - Quickcore</option>
+                        <option value="https://easy-book-593.lilith.com.au/">Infamous - Easy Book</option>
+                        <option value="https://simplelearn4684.justinsteiger.com/">Infamous - Simplelearn</option>
+                        <option value="https://quiet-edge-10627.lastarria.cl/">Infamous - Quiet Edge</option>
+                        <option value="https://brave-course-669.hoohaamelbourne.com.au/">Infamous - Brave Course</option>
+                        <option value="https://deepspan847.lilith.com.au/">Infamous - Deepspan</option>
+                        <option value="https://quick-plan.justinsteiger.com/">Infamous - Quick Plan</option>
+                        <option value="https://solidlearn5100.lastarria.cl/">Infamous - Solidlearn</option>
+                        <option value="https://nimblenode5084.lotossutra.at/">Infamous - Nimblenode</option>
+                        <option value="https://rapidnet8760.b-cdn.net/">Infamous - Rapidnet</option>
+                        <option value="https://litewave9206.b-cdn.net/">Infamous - Litewave</option>
+                        <option value="https://litenet8394.b-cdn.net/">Infamous - Litenet</option>
+                        <option value="https://meganode2515.b-cdn.net/">Infamous - Meganode</option>
+                        <option value="https://primecache3991.b-cdn.net/">Infamous - Primecache</option>
+                        <option value="https://megabeam3500.b-cdn.net/">Infamous - Megabeam</option>
+                        <option value="https://quickhost3591.b-cdn.net/">Infamous - Quickhost</option>
+                    </optgroup>
 
-                <optgroup label="Interstellar">
-                    <option value="https://vcsaontop.unionvillelacrosse.com">Interstellar - VCSA On Top</option>
-                    <option value="https://interstellar.elemporio.ar">Interstellar - Elemporio</option>
-                </optgroup>
+                    <optgroup label="Interstellar">
+                        <option value="https://vcsaontop.unionvillelacrosse.com">Interstellar - VCSA On Top</option>
+                        <option value="https://interstellar.elemporio.ar">Interstellar - Elemporio</option>
+                    </optgroup>
 
-                <optgroup label="StudyHub">
-                    <option value="https://vcsa.lumbinifashion.com.np">StudyHub - VCSA Lumbini</option>
-                    <option value="https://studyhub.heidibranlund.com">StudyHub - Heidi B</option>
-                    <option value="https://studying.elemporio.ar">StudyHub - Studying Elemporio</option>
-                </optgroup>
+                    <optgroup label="StudyHub">
+                        <option value="https://vcsa.lumbinifashion.com.np">StudyHub - VCSA Lumbini</option>
+                        <option value="https://studyhub.heidibranlund.com">StudyHub - Heidi B</option>
+                        <option value="https://studying.elemporio.ar">StudyHub - Studying Elemporio</option>
+                    </optgroup>
 
-                <optgroup label="Ford">
-                    <option value="https://pnandvcsa.unionvillelacrosse.com">Ford - PN & VCSA</option>
-                    <option value="https://ford.heidibranlund.com">Ford - Heidi B</option>
-                    <option value="https://strawberry.elemporio.ar">Ford - Strawberry</option>
-                </optgroup>
+                    <optgroup label="Ford">
+                        <option value="https://pnandvcsa.unionvillelacrosse.com">Ford - PN & VCSA</option>
+                        <option value="https://ford.heidibranlund.com">Ford - Heidi B</option>
+                        <option value="https://strawberry.elemporio.ar">Ford - Strawberry</option>
+                    </optgroup>
 
-                <optgroup label="Topia">
-                    <option value="https://lightsped.elemporio.ar">Topia - Lightsped</option>
-                </optgroup>
+                    <optgroup label="Topia">
+                        <option value="https://lightsped.elemporio.ar">Topia - Lightsped</option>
+                    </optgroup>
 
-                <optgroup label="Parcoil">
-                    <option value="https://parcoils.elemporio.ar">Parcoil - Parcoils</option>
-                    <option value="https://jellybean.ultradec.com">Parcoil - Jellybean</option>
-                </optgroup>
+                    <optgroup label="Parcoil">
+                        <option value="https://parcoils.elemporio.ar">Parcoil - Parcoils</option>
+                        <option value="https://jellybean.ultradec.com">Parcoil - Jellybean</option>
+                    </optgroup>
 
-                <optgroup label="TungTung">
-                    <option value="https://tungtung.cfd">TungTung - Main</option>
-                    <option value="https://greenlight.tanenbaumchat.org">TungTung - Greenlight</option>
-                </optgroup>
+                    <optgroup label="TungTung">
+                        <option value="https://tungtung.cfd">TungTung - Main</option>
+                        <option value="https://greenlight.tanenbaumchat.org">TungTung - Greenlight</option>
+                    </optgroup>
 
-                <optgroup label="Voya">
-                    <option value="https://voya.elemporio.ar">Voya - Main</option>
-                </optgroup>
+                    <optgroup label="Voya">
+                        <option value="https://voya.elemporio.ar">Voya - Main</option>
+                    </optgroup>
 
-                <optgroup label="Space">
-                    <option value="https://spacing.elemporio.ar">Space - Spacing</option>
-                </optgroup>
+                    <optgroup label="Space">
+                        <option value="https://spacing.elemporio.ar">Space - Spacing</option>
+                    </optgroup>
 
-                <optgroup label="Lunar">
-                    <option value="https://science.elemporio.ar">Lunar - Science</option>
-                </optgroup>
+                    <optgroup label="Lunar">
+                        <option value="https://science.elemporio.ar">Lunar - Science</option>
+                    </optgroup>
 
-                <optgroup label="Xylora">
-                    <option value="https://m.oh.wow.eow.elemporio.ar">Xylora - Main</option>
-                </optgroup>
+                    <optgroup label="Xylora">
+                        <option value="https://m.oh.wow.eow.elemporio.ar">Xylora - Main</option>
+                    </optgroup>
 
-                <optgroup label="Vapor">
-                    <option value="https://vaper.wirtschaftslexikon.co">Vapor - Vaper</option>
-                </optgroup>
+                    <optgroup label="Vapor">
+                        <option value="https://vaper.wirtschaftslexikon.co">Vapor - Vaper</option>
+                    </optgroup>
 
-                <optgroup label="PeteZah">
-                    <option value="https://petezah.wirtschaftslexikon.co">PeteZah - Main</option>
-                </optgroup>
+                    <optgroup label="PeteZah">
+                        <option value="https://petezah.wirtschaftslexikon.co">PeteZah - Main</option>
+                    </optgroup>
 
-                <optgroup label="Frogies">
-                    <option value="https://frogies.elemporio.ar">Frogies - Main</option>
-                </optgroup>
+                    <optgroup label="Frogies">
+                        <option value="https://frogies.elemporio.ar">Frogies - Main</option>
+                    </optgroup>
 
-                <optgroup label="Truffled">
-                    <option value="https://truffled.elemporio.ar">Truffled - Main</option>
-                </optgroup>
-            </select>
+                    <optgroup label="Truffled">
+                        <option value="https://truffled.elemporio.ar">Truffled - Main</option>
+                    </optgroup>
+                </select>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // Gate 1: Portal Entry
+        // Check main entrance password
         function checkPassword() {
             const userInput = document.getElementById('password-input').value;
             if (userInput === "tung tung sauhr") {
@@ -207,45 +232,45 @@
             }
         }
 
-        // Enter key shortcut for entrance screen
+        // Allow 'Enter' key shortcut on access prompt
         document.getElementById('password-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkPassword();
             }
         });
 
-        // Intercept selection to check if it belongs to Subways
-        function handleSelection(selectElement) {
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const url = selectedOption.value;
+        // Gate 2: Password check specifically for Subway Surfers Modded Option
+        function accessSubwaySurfers() {
+            const secretPass = prompt("Enter password to access Modded Subway Surfers:");
             
-            if (!url) return;
-
-            // Gate 2: Secondary Password Check for Subways category
-            if (selectedOption.getAttribute('data-secure') === 'true') {
-                const subwaysPassword = prompt("Enter password to access Subways links:");
-                if (subwaysPassword !== "67tungtung") {
-                    alert("Incorrect Subways password access denied.");
-                    selectElement.selectedIndex = 0; // reset
-                    return;
+            if (secretPass === "67tungtung") {
+                // Ask the user which source link they want to open
+                const choice = prompt("Type 1 to open Subway Surfers link #1\nType 2 to open Subway Surfers link #2");
+                
+                if (choice === "1") {
+                    launchSite("https://ss.randomkzn.com");
+                } else if (choice === "2") {
+                    launchSite("https://ashuni.lol/");
+                } else if (choice !== null) {
+                    alert("Invalid choice. Please enter 1 or 2.");
                 }
+            } else if (secretPass !== null) {
+                alert("Incorrect password. Access Denied.");
             }
-
-            // If verification passes or isn't required, launch custom layout
-            launchSite(url);
-            selectElement.selectedIndex = 0; // reset selection index
         }
 
-        // Window isolation structure
+        // Standard clean canvas window launcher (about:blank isolation layer)
         function launchSite(url) {
+            if (!url) return;
+
             const pWin = window.open('about:blank', '_blank');
             if (!pWin) {
-                alert("Pop-up blocked! Please allow pop-ups for this domain.");
+                alert("Pop-up blocked! Please allow pop-ups for this site to view dashboard pages.");
                 return;
             }
 
             const doc = pWin.document;
-            doc.title = "Loading Canvas...";
+            doc.title = "Loading Panel...";
 
             const iframe = doc.createElement('iframe');
             iframe.src = url;
