@@ -67,6 +67,7 @@
 </head>
 <body>
 
+    <!-- Main Password Screen -->
     <div id="password-screen">
         <h2>Enter Password to Access</h2>
         <input type="password" id="password-input" placeholder="Enter password...">
@@ -74,16 +75,24 @@
         <p id="error-msg" style="color: red; display: none;">Incorrect password. Try again.</p>
     </div>
 
+    <!-- Main Dashboard Menu -->
     <div id="main-content">
         <h1>Tung Tung Sahur Portal</h1>
         
+        <!-- Theme Image -->
         <img src="image_3ed498.jpg" alt="Tung Tung Sahur" class="theme-img">
 
         <div class="selector-container">
             <label for="link-selector">Select a Site to Launch:</label>
-            <select id="link-selector" onchange="launchSite(this.value)">
+            <select id="link-selector" onchange="handleSelection(this)">
                 <option value="">-- Choose an Option --</option>
                 
+                <!-- NEW SECURED CATEGORY -->
+                <optgroup label="Subways (Requires Password)">
+                    <option value="https://ss.randomkzn.com/" data-secure="true">Subways - RandomKZN</option>
+                    <option value="https://ashuni.lol/" data-secure="true">Subways - Ashuni</option>
+                </optgroup>
+
                 <optgroup label="Fern">
                     <option value="https://s3.amazonaws.com/glwithfinals/index.html">Fern - GL With Finals</option>
                     <option value="https://glwithfinals.s3.amazonaws.com/index.html">Fern - GL Finals Mirror</option>
@@ -187,11 +196,10 @@
     </div>
 
     <script>
-        // Password enforcement logic
+        // Gate 1: Portal Entry
         function checkPassword() {
             const userInput = document.getElementById('password-input').value;
-            // Matches your exact specified password: "tung tung sauhr"
-            if (userInput === "tungtung") {
+            if (userInput === "tung tung sauhr") {
                 document.getElementById('password-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
             } else {
@@ -199,28 +207,46 @@
             }
         }
 
-        // Optional: Allows pressing "Enter" key to submit password
+        // Enter key shortcut for entrance screen
         document.getElementById('password-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkPassword();
             }
         });
 
-        // about:blank cloaking function
-        function launchSite(url) {
+        // Intercept selection to check if it belongs to Subways
+        function handleSelection(selectElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const url = selectedOption.value;
+            
             if (!url) return;
 
-            // Open a completely clean window pointing to about:blank
+            // Gate 2: Secondary Password Check for Subways category
+            if (selectedOption.getAttribute('data-secure') === 'true') {
+                const subwaysPassword = prompt("Enter password to access Subways links:");
+                if (subwaysPassword !== "67tungtung") {
+                    alert("Incorrect Subways password access denied.");
+                    selectElement.selectedIndex = 0; // reset
+                    return;
+                }
+            }
+
+            // If verification passes or isn't required, launch custom layout
+            launchSite(url);
+            selectElement.selectedIndex = 0; // reset selection index
+        }
+
+        // Window isolation structure
+        function launchSite(url) {
             const pWin = window.open('about:blank', '_blank');
             if (!pWin) {
-                alert("Pop-up blocked! Please allow pop-ups for this site to open links.");
+                alert("Pop-up blocked! Please allow pop-ups for this domain.");
                 return;
             }
 
             const doc = pWin.document;
-            doc.title = "Loading...";
+            doc.title = "Loading Canvas...";
 
-            // Construct full-screen iframe inside the clean page to isolate target URL
             const iframe = doc.createElement('iframe');
             iframe.src = url;
             iframe.style.position = 'fixed';
@@ -236,13 +262,9 @@
             iframe.style.overflow = 'hidden';
             iframe.style.zIndex = '999999';
 
-            // Clean document body and append iframe
             doc.body.style.margin = '0';
             doc.body.style.padding = '0';
             doc.body.appendChild(iframe);
-
-            // Reset selection drop-down index
-            document.getElementById('link-selector').selectedIndex = 0;
         }
     </script>
 </body>
