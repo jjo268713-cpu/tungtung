@@ -22,11 +22,9 @@
             max-width: 800px;
             margin: 0 auto;
             width: 100%;
-            /* Hidden initially until password verification passes */
-            display: none; 
+            display: none; /* Hidden until main password verification passes */
         }
         
-        /* Password Screen Box Structure */
         #password-gate {
             max-width: 400px;
             width: 100%;
@@ -112,11 +110,39 @@
         .subway-btn:hover {
             background-color: #aa33ff;
         }
+
+        /* World Cup Custom Styling */
+        .worldcup-btn {
+            background-color: #0d9488;
+            border-color: #2dd4bf;
+            width: 90%;
+            font-size: 18px;
+            padding: 15px;
+        }
+        .worldcup-btn:hover {
+            background-color: #14b8a6;
+        }
+        .hidden-menu {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #2dd4bf;
+        }
+        .clean-launch-btn {
+            background-color: #111827;
+            border: 2px solid #2dd4bf;
+            width: 43%;
+            font-size: 14px;
+            padding: 10px;
+            margin: 5px;
+        }
+        .clean-launch-btn:hover {
+            background-color: #1f2937;
+        }
     </style>
 </head>
 <body>
 
-    <!-- PASSWORD GATE SECURITY LINK LAYER -->
     <div id="password-gate">
         <h2 style="color: #ffbc66; margin-top: 0;">Portal Authentication</h2>
         <p style="color: #ccc; font-size: 14px;">Please enter your access key to manage web assets.</p>
@@ -125,22 +151,29 @@
         <div id="auth-error" style="color: #ff4444; font-size: 14px; margin-top: 12px; font-weight: bold;"></div>
     </div>
 
-    <!-- Main Content Dashboard -->
     <div id="main-content">
         <h1>Tung Tung Sahur Portal</h1>
         
-        <!-- Referenced Theme Image File -->
         <img src="image_3ed498.jpg" alt="Tung Tung Sahur" class="theme-img">
 
         <div class="dashboard-layout">
             
-            <!-- OPTION 1: MODDED SUBWAY SURFERS SECTION -->
             <div class="section-box">
                 <label>Modded Unlocked All Subway Surfers</label>
                 <button class="subway-btn" onclick="launchSubwaySurfers()">Launch Subway Surfers Mod</button>
             </div>
 
-            <!-- OPTION 2: GENERAL UNBLOCKED WEBSITES DROPDOWN -->
+            <div class="section-box" style="border-color: #2dd4bf;">
+                <label style="color: #2dd4bf;">Secure Network Storage</label>
+                <button class="worldcup-btn" onclick="unlockWorldCupPanel()">World CUP</button>
+                
+                <div id="worldcup-menu" class="hidden-menu">
+                    <p style="font-size: 13px; color: #9ca3af; margin-bottom: 10px;">Select a sandboxed container to open:</p>
+                    <button class="clean-launch-btn" onclick="launchSiteClean('http://mathstudy.dila.cl/')">Math Study</button>
+                    <button class="clean-launch-btn" style="border-color: #3b82f6;" onclick="launchSiteClean('https://www.yallashots.top/')">YallaShots</button>
+                </div>
+            </div>
+
             <div class="section-box">
                 <label for="link-selector">Unblocked Websites Collection</label>
                 <select id="link-selector" onchange="launchSite(this.value); this.selectedIndex = 0;">
@@ -251,7 +284,7 @@
     </div>
 
     <script>
-        // Password validation engine
+        // Main entry password verification
         function verifyGatePassword() {
             const inputVal = document.getElementById('access-key-field').value;
             const gateDiv = document.getElementById('password-gate');
@@ -267,7 +300,19 @@
             }
         }
 
-        // Connect enter key submission behavior to input field
+        // Sub-tier key verification prompt for the World Cup button 
+        function unlockWorldCupPanel() {
+            const secondaryPass = prompt("Enter Key to Access Secure Links:");
+            const targetMenu = document.getElementById('worldcup-menu');
+            
+            if (secondaryPass === "joseph021713") {
+                targetMenu.style.display = "block";
+            } else if (secondaryPass !== null) {
+                alert("ACCESS DENIED: Invalid Security Key.");
+            }
+        }
+
+        // Connect enter key submission behavior to main password field
         document.getElementById('access-key-field').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 verifyGatePassword();
@@ -285,6 +330,40 @@
             } else if (choice !== null) {
                 alert("Invalid choice. Please enter 1 or 2.");
             }
+        }
+
+        // Custom sandbox loader to remove ads from Math Study and YallaShots
+        function launchSiteClean(url) {
+            if (!url) return;
+            const pWin = window.open('about:blank', '_blank');
+            if (!pWin) {
+                alert("Pop-up blocked! Please allow pop-ups.");
+                return;
+            }
+            const doc = pWin.document;
+            doc.title = "Google Docs";
+            
+            // Disguise tab with a Google Docs icon
+            const iconLink = doc.createElement('link');
+            iconLink.rel = 'icon';
+            iconLink.href = 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico';
+            doc.head.appendChild(iconLink);
+
+            const iframe = doc.createElement('iframe');
+            iframe.src = url;
+            iframe.style.width = '100vw';
+            iframe.style.height = '100vh';
+            iframe.style.border = 'none';
+            iframe.style.margin = '0';
+            iframe.style.padding = '0';
+            
+            // Sandbox parameters protect against background popup ads or tracking loops
+            iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
+
+            doc.body.style.margin = '0';
+            doc.body.style.padding = '0';
+            doc.body.style.overflow = 'hidden';
+            doc.body.appendChild(iframe);
         }
 
         // Standard clean canvas window launcher (about:blank isolation layer)
