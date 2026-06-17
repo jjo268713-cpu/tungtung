@@ -10,13 +10,15 @@
             color: #fff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
             margin: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: flex-start;
             min-height: 100vh;
             box-sizing: border-box;
+            overflow-y: auto;
         }
         #main-content {
             max-width: 800px;
@@ -34,6 +36,8 @@
             border: 2px solid #d47200;
             box-shadow: 0 8px 16px rgba(212, 114, 0, 0.2);
             box-sizing: border-box;
+            margin-top: auto;
+            margin-bottom: auto;
         }
         .pass-input {
             width: 100%;
@@ -143,6 +147,7 @@
 </head>
 <body>
 
+    <!-- PASSWORD GATE SECURITY LINK LAYER -->
     <div id="password-gate">
         <h2 style="color: #ffbc66; margin-top: 0;">Portal Authentication</h2>
         <p style="color: #ccc; font-size: 14px;">Please enter your access key to manage web assets.</p>
@@ -151,22 +156,27 @@
         <div id="auth-error" style="color: #ff4444; font-size: 14px; margin-top: 12px; font-weight: bold;"></div>
     </div>
 
+    <!-- Main Content Dashboard -->
     <div id="main-content">
         <h1>Tung Tung Sahur Portal</h1>
         
+        <!-- Referenced Theme Image File -->
         <img src="image_3ed498.jpg" alt="Tung Tung Sahur" class="theme-img">
 
         <div class="dashboard-layout">
             
+            <!-- OPTION 1: MODDED SUBWAY SURFERS SECTION -->
             <div class="section-box">
                 <label>Modded Unlocked All Subway Surfers</label>
                 <button class="subway-btn" onclick="launchSubwaySurfers()">Launch Subway Surfers Mod</button>
             </div>
 
+            <!-- NEW OPTION: WORLD CUP LOCKED PANEL -->
             <div class="section-box" style="border-color: #2dd4bf;">
                 <label style="color: #2dd4bf;">Secure Network Storage</label>
                 <button class="worldcup-btn" onclick="unlockWorldCupPanel()">World CUP</button>
                 
+                <!-- This inside menu reveals itself once the joseph021713 key passes -->
                 <div id="worldcup-menu" class="hidden-menu">
                     <p style="font-size: 13px; color: #9ca3af; margin-bottom: 10px;">Select a sandboxed container to open:</p>
                     <button class="clean-launch-btn" onclick="launchSiteClean('http://mathstudy.dila.cl/')">Math Study</button>
@@ -174,6 +184,7 @@
                 </div>
             </div>
 
+            <!-- OPTION 2: GENERAL UNBLOCKED WEBSITES DROPDOWN -->
             <div class="section-box">
                 <label for="link-selector">Unblocked Websites Collection</label>
                 <select id="link-selector" onchange="launchSite(this.value); this.selectedIndex = 0;">
@@ -292,6 +303,7 @@
             const errorDiv = document.getElementById('auth-error');
 
             if (inputVal === "worldcup288") {
+                gateDiv.style.display = "block";
                 gateDiv.style.display = "none";
                 mainContentDiv.style.display = "block";
             } else {
