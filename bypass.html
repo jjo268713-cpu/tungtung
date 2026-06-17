@@ -12,11 +12,48 @@
             text-align: center;
             padding: 20px;
             margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
         #main-content {
             max-width: 800px;
             margin: 0 auto;
+            width: 100%;
+            /* Hidden initially until password verification passes */
+            display: none; 
         }
+        
+        /* Password Screen Box Structure */
+        #password-gate {
+            max-width: 400px;
+            width: 100%;
+            background-color: #2a1a08;
+            padding: 35px;
+            border-radius: 12px;
+            border: 2px solid #d47200;
+            box-shadow: 0 8px 16px rgba(212, 114, 0, 0.2);
+            box-sizing: border-box;
+        }
+        .pass-input {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a0f00;
+            border: 2px solid #d47200;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin: 15px 0;
+            text-align: center;
+            outline: none;
+        }
+        .pass-input:focus {
+            border-color: #ff8c00;
+        }
+
         .theme-img {
             max-width: 300px;
             border-radius: 15px;
@@ -79,7 +116,16 @@
 </head>
 <body>
 
-    <!-- Main Content Dashboard (Visible Immediately) -->
+    <!-- PASSWORD GATE SECURITY LINK LAYER -->
+    <div id="password-gate">
+        <h2 style="color: #ffbc66; margin-top: 0;">Portal Authentication</h2>
+        <p style="color: #ccc; font-size: 14px;">Please enter your access key to manage web assets.</p>
+        <input type="password" id="access-key-field" class="pass-input" placeholder="Enter Password">
+        <button style="width: 100%; margin: 5px 0 0 0;" onclick="verifyGatePassword()">Access Dashboard</button>
+        <div id="auth-error" style="color: #ff4444; font-size: 14px; margin-top: 12px; font-weight: bold;"></div>
+    </div>
+
+    <!-- Main Content Dashboard -->
     <div id="main-content">
         <h1>Tung Tung Sahur Portal</h1>
         
@@ -205,6 +251,29 @@
     </div>
 
     <script>
+        // Password validation engine
+        function verifyGatePassword() {
+            const inputVal = document.getElementById('access-key-field').value;
+            const gateDiv = document.getElementById('password-gate');
+            const mainContentDiv = document.getElementById('main-content');
+            const errorDiv = document.getElementById('auth-error');
+
+            if (inputVal === "worldcup288") {
+                gateDiv.style.display = "none";
+                mainContentDiv.style.display = "block";
+            } else {
+                errorDiv.innerText = "Error: Incorrect authentication password.";
+                document.getElementById('access-key-field').value = "";
+            }
+        }
+
+        // Connect enter key submission behavior to input field
+        document.getElementById('access-key-field').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyGatePassword();
+            }
+        });
+
         // Directly prompts link choices for Subway Surfers option
         function launchSubwaySurfers() {
             const choice = prompt("Type 1 to open Subway Surfers link #1\nType 2 to open Subway Surfers link #2");
